@@ -1,13 +1,13 @@
 <template>
   <header :class="['w-full', 'text-sm', headerHeightClass]">
-    <div class="fixed top-0 left-0 z-10 h-16 w-full bg-white">
+    <div class="fixed left-0 top-0 z-10 h-16 w-full bg-white">
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
         <router-link
           :to="{ name: 'Home' }"
           class="flex h-full items-center text-xl"
-          >Bartender App</router-link
+          >The Game</router-link
         >
 
         <nav class="ml-12 h-full">
@@ -48,6 +48,7 @@ import TheSubnav from "@/components/Navigation/TheSubnav.vue";
 const menuItems = ref([
   { text: "Drinks", name: "DrinkResults" },
   { text: "Ingredients", name: "Ingredients" },
+  { text: "Hero", name: "Hero" },
 ]);
 
 const userStore = useUserStore();

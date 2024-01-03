@@ -4,6 +4,7 @@ import HomeView from "@/views/HomeView.vue";
 import DrinkResultsView from "@/views/DrinkResultsView.vue";
 import DrinkView from "@/views/DrinkView.vue";
 import IngredientsView from "@/views/IngredientsView.vue";
+import HeroView from "@/views/HeroView.vue";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: "/ingredients",
     name: "Ingredients",
     component: IngredientsView,
+  },
+  {
+    path: "/hero",
+    name: "Hero",
+    component: HeroView,
   },
 ];
 

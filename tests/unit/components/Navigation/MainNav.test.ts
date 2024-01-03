@@ -41,9 +41,9 @@ describe("MainNav", () => {
     renderMainNav();
     const navigationMenuItems = screen.getAllByRole("listitem");
     const navigationMenuTexts = navigationMenuItems.map(
-      (item) => item.textContent
+      (item) => item.textContent,
     );
-    expect(navigationMenuTexts).toEqual(["Drinks", "Ingredients"]);
+    expect(navigationMenuTexts).toEqual(["Drinks", "Ingredients", "Hero"]);
   });
 
   describe("when the user logs in", () => {
