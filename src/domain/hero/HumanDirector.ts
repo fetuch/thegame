@@ -1,5 +1,5 @@
 import type { iHero } from "@/api/types";
-import HeroBuilder from "@/hero/HeroBuilder";
+import HeroBuilder from "@/domain/hero/HeroBuilder";
 
 export default class HeroHumanDirector {
   static construct(): iHero {

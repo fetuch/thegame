@@ -18,19 +18,19 @@
         </svg>
       </div>
       <div>
-        <h4 class="text-lg font-bold">{{ hero.name }}</h4>
+        <h4 class="text-lg font-bold">{{ hero.getName() }}</h4>
         <p class="mt-1">
-          {{ hero.description }}
+          {{ hero.getDescription() }}
         </p>
 
         <p class="mt-1">
-          {{ hero.maxMana }}
+          {{ hero.getMaxMana() }}
         </p>
       </div>
     </div>
 
     <div class="w-1/6">
-      <hero-attributes :attributes="hero.attributes" />
+      <hero-attributes :attributes="hero.race?.attributes" />
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ import { useOpenAIStore } from "@/stores/openAI";
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import HeroAttributes from "@/components/HeroCard/HeroAttributes.vue";
 
-import ElfDirector from "@/hero/ElfDirector";
+import ElfDirector from "@/domain/hero/ElfDirector";
 
 const hero = ElfDirector.construct();
 

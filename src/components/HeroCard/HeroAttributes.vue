@@ -10,7 +10,7 @@
   >
     <dl class="divide-y divide-gray-100">
       <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm font-medium leading-6 text-gray-900">
+        <dt class="text-uppercase text-sm font-medium leading-6 text-gray-900">
           {{ attribute.name }}
         </dt>
         <dd
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import type { PropType } from "vue";
-import type { iAttribute } from "@/api/types";
+import type { iAttribute } from "@/domain/race/race";
 
 defineProps({
   attributes: {
