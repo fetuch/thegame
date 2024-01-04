@@ -10,7 +10,7 @@ export class Human implements iRace {
       value: 6,
     },
     {
-      name: "aglity",
+      name: "dexterity",
       value: 5,
     },
     {
@@ -22,7 +22,7 @@ export class Human implements iRace {
       value: 5,
     },
     {
-      name: "condition",
+      name: "constitution",
       value: 6,
     },
   ];

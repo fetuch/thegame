@@ -10,7 +10,7 @@ export class Elf implements iRace {
       value: 4,
     },
     {
-      name: "aglity",
+      name: "dexterity",
       value: 8,
     },
     {
@@ -22,7 +22,7 @@ export class Elf implements iRace {
       value: 6,
     },
     {
-      name: "condition",
+      name: "constitution",
       value: 4,
     },
   ];

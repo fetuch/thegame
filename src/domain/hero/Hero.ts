@@ -43,7 +43,7 @@ export class Hero implements iHero {
   public getMaxHP(): number {
     return (
       (this.race?.attributes?.find(
-        (attribute) => attribute.name === "condition"
+        (attribute) => attribute.name === "constitution"
       )?.value ?? 0) * 2
     );
   }

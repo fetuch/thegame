@@ -41,8 +41,10 @@ import ActionButton from "@/components/Shared/ActionButton.vue";
 import HeroAttributes from "@/components/HeroCard/HeroAttributes.vue";
 
 import ElfDirector from "@/domain/hero/ElfDirector";
+import DaggerDirector from "@/domain/item/DaggerDirector";
 
 const hero = ElfDirector.construct();
+const dagger = DaggerDirector.construct();
 
 const openAIStore = useOpenAIStore();
 const chat = openAIStore.CHAT;

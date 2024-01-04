@@ -4,10 +4,10 @@
 
 type attributeNames =
   | "strength"
-  | "aglity"
+  | "dexterity"
   | "intelligence"
   | "wisdom"
-  | "condition";
+  | "constitution";
 
 export interface iAttribute {
   name: attributeNames;
