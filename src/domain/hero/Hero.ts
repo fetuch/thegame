@@ -1,17 +1,6 @@
+import { effect } from "vue";
 import type { iItem } from "../item/Item";
-import type { iRace } from "../race/Race";
-
-type attributeNames =
-  | "strength"
-  | "aglity"
-  | "intelligence"
-  | "wisdom"
-  | "condition";
-
-export interface iAttribute {
-  name: attributeNames;
-  value: number;
-}
+import type { iRace, iAttribute } from "../race/Race";
 
 type heroEquipment = {
   head?: iItem;
@@ -23,9 +12,12 @@ export interface iHero {
   getRace(): string;
   getName(): string;
   getDescription(): string;
+  getAttributes(): iAttribute[];
   getMaxHP(): number;
   getMaxMana(): number;
   getEquipment(): heroEquipment;
+  getDefence(): number;
+  getAttack(): number;
   setRace(race: iRace): void;
   setName(name: string): void;
   setDescription(description: string): void;
@@ -36,7 +28,6 @@ export class Hero implements iHero {
   private race?: iRace;
   private name?: string;
   private description = "";
-  // private equipment: iItem[];
   private equipment: heroEquipment;
 
   constructor() {
@@ -57,6 +48,10 @@ export class Hero implements iHero {
 
   public getDescription(): string {
     return this.description;
+  }
+
+  public getAttributes(): iAttribute[] {
+    return this.race?.attributes ?? [];
   }
 
   public getMaxHP(): number {
@@ -83,6 +78,37 @@ export class Hero implements iHero {
     return this.equipment;
   }
 
+  getDefence(): number {
+    let defence =
+      (this.race?.attributes?.find(
+        (attribute) => attribute.name === "dexterity"
+      )?.value ?? 0) * 5;
+
+    Object.entries(this.equipment).forEach(([slot, item]) => {
+      item
+        .getEffects()
+        .filter((effect) => effect.name === "defence")
+        .forEach((effect) => (defence += effect.value));
+    });
+
+    return defence;
+  }
+
+  getAttack(): number {
+    let attack =
+      (this.race?.attributes?.find((attribute) => attribute.name === "strength")
+        ?.value ?? 0) * 5;
+
+    Object.entries(this.equipment).forEach(([slot, item]) => {
+      item
+        .getEffects()
+        .filter((effect) => effect.name === "attack")
+        .forEach((effect) => (attack += effect.value));
+    });
+
+    return attack;
+  }
+
   public setRace(race: iRace) {
     this.race = race;
   }
@@ -103,7 +129,7 @@ export class Hero implements iHero {
     ) {
       this.equipment[item.getEquipableSlot()] = item;
     }
-    // this.equipment["chest"] = item;
+
     return this;
   }
 }

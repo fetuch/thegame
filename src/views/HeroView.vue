@@ -23,14 +23,14 @@
           {{ hero.getDescription() }}
         </p>
 
-        <p class="mt-1">
-          {{ hero.getMaxMana() }}
-        </p>
+        <p class="mt-1">Max Mana {{ hero.getMaxMana() }}</p>
+        <p class="mt-1">Defence {{ hero.getDefence() }}</p>
+        <p class="mt-1">Attack {{ hero.getAttack() }}</p>
       </div>
     </div>
 
     <div class="w-1/6">
-      <hero-attributes :attributes="hero.race?.attributes" />
+      <hero-attributes :attributes="hero.getAttributes()" />
     </div>
   </div>
 </template>
