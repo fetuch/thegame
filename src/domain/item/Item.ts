@@ -13,7 +13,7 @@
  *
  */
 
-export type itemType = "potion" | "weapon" | "armour";
+export type itemType = "potion" | "weapon" | "armor";
 
 type effectName =
   | "defence"
@@ -31,7 +31,7 @@ export interface iItemEffect {
   value: number;
 }
 
-export type equipableSlot = "head" | "chest" | "left hand" | null;
+export type equipableSlot = "head" | "chest" | "left_hand" | null;
 
 export interface iItem {
   getType(): itemType;

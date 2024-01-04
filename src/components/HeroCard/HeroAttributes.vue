@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import type { PropType } from "vue";
-import type { iAttribute } from "@/domain/race/race";
+import type { iAttribute } from "@/domain/race/Race";
 
 defineProps({
   attributes: {

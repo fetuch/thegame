@@ -1,29 +1,29 @@
-import type { iRace } from "./race";
-import type { iAttribute } from "./race";
+import type { iRace } from "./Race";
+import type { iAttribute } from "./Race";
 
-export class Elf implements iRace {
-  name = "Elf";
+export class Human implements iRace {
+  name = "Human";
 
   attributes: iAttribute[] = [
     {
       name: "strength",
-      value: 4,
-    },
-    {
-      name: "dexterity",
-      value: 8,
-    },
-    {
-      name: "intelligence",
-      value: 7,
-    },
-    {
-      name: "wisdom",
       value: 6,
     },
     {
+      name: "dexterity",
+      value: 5,
+    },
+    {
+      name: "intelligence",
+      value: 5,
+    },
+    {
+      name: "wisdom",
+      value: 5,
+    },
+    {
       name: "constitution",
-      value: 4,
+      value: 6,
     },
   ];
 }

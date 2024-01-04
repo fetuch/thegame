@@ -1,6 +1,7 @@
 import type { iHero } from "./Hero";
 import { Hero } from "./Hero";
-import type { iRace } from "../race/race";
+import type { iRace } from "../race/Race";
+import type { iItem } from "../item/Item";
 
 export interface iHeroBuilder {
   Hero: iHero;
@@ -33,14 +34,10 @@ export default class HeroBuilder implements iHeroBuilder {
     return this;
   }
 
-  // setAttribute(newAttribute: iAttribute): this {
-  //   const attributeIndex = this.Hero.attributes.findIndex(
-  //     (obj) => obj.name == newAttribute.name
-  //   );
-  //   this.Hero.attributes[attributeIndex].value = newAttribute.value;
-
-  //   return this;
-  // }
+  equipItem(item: iItem): this {
+    this.Hero.equipItem(item);
+    return this;
+  }
 
   getResult(): iHero {
     return this.Hero;

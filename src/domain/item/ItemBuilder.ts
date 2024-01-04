@@ -1,5 +1,5 @@
-import type { iItem, itemType, iItemEffect, equipableSlot } from "./item";
-import { Item } from "./item";
+import type { iItem, itemType, iItemEffect, equipableSlot } from "./Item";
+import { Item } from "./Item";
 
 export interface iItemBuilder {
   Item: iItem;

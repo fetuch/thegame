@@ -1,4 +1,5 @@
-import type { iRace } from "../race/race";
+import type { iItem } from "../item/Item";
+import type { iRace } from "../race/Race";
 
 type attributeNames =
   | "strength"
@@ -12,21 +13,39 @@ export interface iAttribute {
   value: number;
 }
 
+type heroEquipment = {
+  head?: iItem;
+  chest?: iItem;
+  left_hand?: iItem;
+};
+
 export interface iHero {
   getRace(): string;
   getName(): string;
   getDescription(): string;
   getMaxHP(): number;
   getMaxMana(): number;
+  getEquipment(): heroEquipment;
   setRace(race: iRace): void;
   setName(name: string): void;
   setDescription(description: string): void;
+  equipItem(item: iItem): void;
 }
 
 export class Hero implements iHero {
   private race?: iRace;
   private name?: string;
-  description = "";
+  private description = "";
+  // private equipment: iItem[];
+  private equipment: heroEquipment;
+
+  constructor() {
+    this.equipment = {
+      head: undefined,
+      chest: undefined,
+      left_hand: undefined,
+    };
+  }
 
   public getRace(): string {
     return this.race?.name ?? "undefined race";
@@ -60,6 +79,10 @@ export class Hero implements iHero {
     );
   }
 
+  getEquipment(): heroEquipment {
+    return this.equipment;
+  }
+
   public setRace(race: iRace) {
     this.race = race;
   }
@@ -70,5 +93,17 @@ export class Hero implements iHero {
 
   public setDescription(description: string) {
     this.description = description;
+  }
+
+  public equipItem(item: iItem) {
+    if (
+      Object.keys(this.equipment).some(
+        (slot) => slot === item.getEquipableSlot()
+      )
+    ) {
+      this.equipment[item.getEquipableSlot()] = item;
+    }
+    // this.equipment["chest"] = item;
+    return this;
   }
 }
