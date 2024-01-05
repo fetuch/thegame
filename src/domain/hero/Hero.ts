@@ -1,9 +1,10 @@
 import type { iItem } from "../item/Item";
 import type { iRace, Attributes } from "../race/Race";
 
-type heroEquipment = {
+export type HeroEquipment = {
   head?: iItem;
   chest?: iItem;
+  hands?: iItem;
   left_hand?: iItem;
 };
 
@@ -14,7 +15,7 @@ export interface iHero {
   getAttributes(): Attributes;
   getMaxHP(): number;
   getMaxMana(): number;
-  getEquipment(): heroEquipment;
+  getEquipment(): HeroEquipment;
   getDefence(): number;
   getAttack(): number;
   setRace(race: iRace): void;
@@ -27,7 +28,7 @@ export class Hero implements iHero {
   private race: iRace;
   private name?: string;
   private description = "";
-  private equipment: heroEquipment;
+  private equipment: HeroEquipment;
 
   constructor(race: iRace) {
     this.race = race;
@@ -35,6 +36,7 @@ export class Hero implements iHero {
     this.equipment = {
       head: undefined,
       chest: undefined,
+      hands: undefined,
       left_hand: undefined,
     };
   }
@@ -56,25 +58,10 @@ export class Hero implements iHero {
   }
 
   public getMaxHP(): number {
-    // return (
-    //   (this.race?.attributes?.find(
-    //     (attribute) => attribute.name === "constitution"
-    //   )?.value ?? 0) * 10
-    // );
     return this.race.attributes.constitution * 10;
   }
 
   public getMaxMana(): number {
-    // return (
-    //   (this.race?.attributes?.find(
-    //     (attribute) => attribute.name === "intelligence"
-    //   )?.value ?? 0) *
-    //     10 +
-    //   (this.race?.attributes?.find((attribute) => attribute.name === "wisdom")
-    //     ?.value ?? 0) *
-    //     5
-    // );
-
     return (
       this.race.attributes.intelligence * 10 + this.race.attributes.wisdom * 5
     );
@@ -88,10 +75,12 @@ export class Hero implements iHero {
     let defence = this.race.attributes.dexterity * 5;
 
     Object.entries(this.equipment).forEach(([slot, item]) => {
-      item
-        .getEffects()
-        .filter((effect) => effect.name === "defence")
-        .forEach((effect) => (defence += effect.value));
+      if (item) {
+        item
+          .getEffects()
+          .filter((effect) => effect.name === "defence")
+          .forEach((effect) => (defence += effect.value));
+      }
     });
 
     return defence;
@@ -101,10 +90,12 @@ export class Hero implements iHero {
     let attack = this.race.attributes.strength * 5;
 
     Object.entries(this.equipment).forEach(([slot, item]) => {
-      item
-        .getEffects()
-        .filter((effect) => effect.name === "attack")
-        .forEach((effect) => (attack += effect.value));
+      if (item) {
+        item
+          .getEffects()
+          .filter((effect) => effect.name === "attack")
+          .forEach((effect) => (attack += effect.value));
+      }
     });
 
     return attack;

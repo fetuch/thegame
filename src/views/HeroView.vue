@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto my-16 max-w-5xl space-y-6 px-6">
+  <div class="mx-auto my-16 max-w-5xl space-y-10 px-6">
     <div class="flex">
       <div class="mr-4 flex-shrink-0">
         <svg
@@ -17,27 +17,43 @@
           />
         </svg>
       </div>
+
       <div>
-        <h4 class="text-lg font-bold">{{ hero.getName() }}</h4>
+        <h4 class="text-lg font-bold">
+          {{ hero.getName() }}, {{ hero.getRace() }}
+        </h4>
+
         <p class="mt-1">
           {{ hero.getDescription() }}
         </p>
-
-        <p class="mt-1">Max HP {{ hero.getMaxHP() }}</p>
-        <p class="mt-1">Max Mana {{ hero.getMaxMana() }}</p>
-        <p class="mt-1">Defence {{ hero.getDefence() }}</p>
-        <p class="mt-1">Attack {{ hero.getAttack() }}</p>
       </div>
     </div>
 
-    <div class="w-1/6">
-      <hero-attributes :attributes="hero.getAttributes()" />
+    <div class="flex space-x-10 align-baseline">
+      <div class="w-1/6">
+        <hero-attributes :attributes="hero.getAttributes()" />
+      </div>
+
+      <div class="w-1/6">
+        <hero-info
+          :max-h-p="hero.getMaxHP()"
+          :max-mana="hero.getMaxMana()"
+          :attack="hero.getAttack()"
+          :defence="hero.getDefence()"
+        />
+      </div>
+
+      <div class="w-2/3">
+        <hero-equipment :equipment="hero.getEquipment()" />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import HeroAttributes from "@/components/HeroCard/HeroAttributes.vue";
+import HeroInfo from "@/components/HeroCard/HeroInfo.vue";
+import HeroEquipment from "@/components/HeroCard/HeroEquipment.vue";
 import ElfDirector from "@/domain/hero/ElfDirector";
 
 const hero = ElfDirector.construct();

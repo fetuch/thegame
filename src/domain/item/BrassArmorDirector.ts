@@ -13,6 +13,10 @@ export default class BrassArmorDirector {
         name: "defence",
         value: 20,
       })
+      .addEffect({
+        name: "attack",
+        value: 10,
+      })
       .getResult();
   }
 }
