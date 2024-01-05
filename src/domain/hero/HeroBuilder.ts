@@ -16,7 +16,7 @@ export default class HeroBuilder implements iHeroBuilder {
   Hero: iHero;
 
   constructor() {
-    this.Hero = new Hero();
+    this.Hero = new Hero({} as iRace);
   }
 
   setRace(race: iRace): this {

@@ -1,6 +1,5 @@
-import { effect } from "vue";
 import type { iItem } from "../item/Item";
-import type { iRace, iAttribute } from "../race/Race";
+import type { iRace, Attributes } from "../race/Race";
 
 type heroEquipment = {
   head?: iItem;
@@ -12,7 +11,7 @@ export interface iHero {
   getRace(): string;
   getName(): string;
   getDescription(): string;
-  getAttributes(): iAttribute[];
+  getAttributes(): Attributes;
   getMaxHP(): number;
   getMaxMana(): number;
   getEquipment(): heroEquipment;
@@ -25,12 +24,14 @@ export interface iHero {
 }
 
 export class Hero implements iHero {
-  private race?: iRace;
+  private race: iRace;
   private name?: string;
   private description = "";
   private equipment: heroEquipment;
 
-  constructor() {
+  constructor(race: iRace) {
+    this.race = race;
+
     this.equipment = {
       head: undefined,
       chest: undefined,
@@ -50,39 +51,41 @@ export class Hero implements iHero {
     return this.description;
   }
 
-  public getAttributes(): iAttribute[] {
-    return this.race?.attributes ?? [];
+  public getAttributes(): Attributes {
+    return this.race.attributes;
   }
 
   public getMaxHP(): number {
-    return (
-      (this.race?.attributes?.find(
-        (attribute) => attribute.name === "constitution"
-      )?.value ?? 0) * 2
-    );
+    // return (
+    //   (this.race?.attributes?.find(
+    //     (attribute) => attribute.name === "constitution"
+    //   )?.value ?? 0) * 10
+    // );
+    return this.race.attributes.constitution * 10;
   }
 
   public getMaxMana(): number {
+    // return (
+    //   (this.race?.attributes?.find(
+    //     (attribute) => attribute.name === "intelligence"
+    //   )?.value ?? 0) *
+    //     10 +
+    //   (this.race?.attributes?.find((attribute) => attribute.name === "wisdom")
+    //     ?.value ?? 0) *
+    //     5
+    // );
+
     return (
-      (this.race?.attributes?.find(
-        (attribute) => attribute.name === "intelligence"
-      )?.value ?? 0) *
-        10 +
-      (this.race?.attributes?.find((attribute) => attribute.name === "wisdom")
-        ?.value ?? 0) *
-        5
+      this.race.attributes.intelligence * 10 + this.race.attributes.wisdom * 5
     );
   }
 
-  getEquipment(): heroEquipment {
+  public getEquipment(): heroEquipment {
     return this.equipment;
   }
 
-  getDefence(): number {
-    let defence =
-      (this.race?.attributes?.find(
-        (attribute) => attribute.name === "dexterity"
-      )?.value ?? 0) * 5;
+  public getDefence(): number {
+    let defence = this.race.attributes.dexterity * 5;
 
     Object.entries(this.equipment).forEach(([slot, item]) => {
       item
@@ -94,10 +97,8 @@ export class Hero implements iHero {
     return defence;
   }
 
-  getAttack(): number {
-    let attack =
-      (this.race?.attributes?.find((attribute) => attribute.name === "strength")
-        ?.value ?? 0) * 5;
+  public getAttack(): number {
+    let attack = this.race.attributes.strength * 5;
 
     Object.entries(this.equipment).forEach(([slot, item]) => {
       item

@@ -23,6 +23,7 @@
           {{ hero.getDescription() }}
         </p>
 
+        <p class="mt-1">Max HP {{ hero.getMaxHP() }}</p>
         <p class="mt-1">Max Mana {{ hero.getMaxMana() }}</p>
         <p class="mt-1">Defence {{ hero.getDefence() }}</p>
         <p class="mt-1">Attack {{ hero.getAttack() }}</p>
@@ -36,14 +37,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useOpenAIStore } from "@/stores/openAI";
-import ActionButton from "@/components/Shared/ActionButton.vue";
 import HeroAttributes from "@/components/HeroCard/HeroAttributes.vue";
-
 import ElfDirector from "@/domain/hero/ElfDirector";
 
 const hero = ElfDirector.construct();
-
-const openAIStore = useOpenAIStore();
-const chat = openAIStore.CHAT;
 </script>

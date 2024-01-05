@@ -2,19 +2,27 @@
  * The Race interface
  */
 
-type attributeNames =
-  | "strength"
-  | "dexterity"
-  | "intelligence"
-  | "wisdom"
-  | "constitution";
+// type attributeNames =
+//   | "strength"
+//   | "dexterity"
+//   | "intelligence"
+//   | "wisdom"
+//   | "constitution";
 
-export interface iAttribute {
-  name: attributeNames;
-  value: number;
-}
+// export interface iAttribute {
+//   name: attributeNames;
+//   value: number;
+// }
 
-export interface iRace {
+export type Attributes = {
+  strength: number;
+  dexterity: number;
+  intelligence: number;
+  wisdom: number;
+  constitution: number;
+};
+
+export type iRace = {
   name: string;
-  attributes: iAttribute[];
-}
+  attributes: Attributes;
+};
