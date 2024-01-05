@@ -29,7 +29,7 @@ import type { Attributes } from "@/domain/race/Race";
 
 defineProps({
   attributes: {
-    type: Array as PropType<Array<Attributes>>,
+    type: Object as PropType<Array<Attributes>>,
     required: true,
   },
 });
