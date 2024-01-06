@@ -55,6 +55,9 @@ import HeroAttributes from "@/components/HeroCard/HeroAttributes.vue";
 import HeroInfo from "@/components/HeroCard/HeroInfo.vue";
 import HeroEquipment from "@/components/HeroCard/HeroEquipment.vue";
 import ElfDirector from "@/domain/hero/ElfDirector";
+import FireballDirector from "@/domain/skill/FireballDirector";
 
 const hero = ElfDirector.construct();
+
+const fireball = FireballDirector.construct();
 </script>

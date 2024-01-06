@@ -31,7 +31,7 @@ export interface iItemEffect {
   value: number;
 }
 
-export type equipableSlot = "head" | "chest" | "left_hand" | null;
+export type equipableSlot = "head" | "chest" | "lefHand" | null;
 
 export interface iItem {
   getType(): itemType;

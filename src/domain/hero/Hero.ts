@@ -5,7 +5,13 @@ export type HeroEquipment = {
   head?: iItem;
   chest?: iItem;
   hands?: iItem;
-  left_hand?: iItem;
+  legs?: iItem;
+  feet?: iItem;
+  neck?: iItem;
+  leftRing?: iItem;
+  rightRing?: iItem;
+  leftHand?: iItem;
+  rightHand?: iItem;
 };
 
 export interface iHero {
@@ -37,7 +43,13 @@ export class Hero implements iHero {
       head: undefined,
       chest: undefined,
       hands: undefined,
-      left_hand: undefined,
+      legs: undefined,
+      feet: undefined,
+      neck: undefined,
+      leftRing: undefined,
+      rightRing: undefined,
+      leftHand: undefined,
+      rightHand: undefined,
     };
   }
 
@@ -67,7 +79,7 @@ export class Hero implements iHero {
     );
   }
 
-  public getEquipment(): heroEquipment {
+  public getEquipment(): HeroEquipment {
     return this.equipment;
   }
 
