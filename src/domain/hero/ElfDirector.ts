@@ -1,12 +1,13 @@
-import type { iHero } from "./Hero";
+import type { Hero } from "./Hero";
 import HeroBuilder from "./HeroBuilder";
 import { Elf } from "../race/Elf";
 import LeatherHelmDirector from "../item/LeatherHelmDirector";
 import BrassArmorDirector from "../item/BrassArmorDirector";
 import DaggerDirector from "../item/DaggerDirector";
+import HealDirector from "../skill/HealDirector";
 
 export default class HeroElfDirector {
-  static construct(): iHero {
+  static construct(): Hero {
     return new HeroBuilder(new Elf())
       .setName("Elandril Moonshadow")
       .setDescription(
@@ -15,6 +16,7 @@ export default class HeroElfDirector {
       .equipItem(LeatherHelmDirector.construct())
       .equipItem(BrassArmorDirector.construct())
       .equipItem(DaggerDirector.construct())
+      .addSkill(HealDirector.construct())
       .getResult();
   }
 }

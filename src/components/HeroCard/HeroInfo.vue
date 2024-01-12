@@ -41,7 +41,7 @@
         <dd
           class="mt-1 text-right text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"
         >
-          {{ maxHP }}
+          {{ currentHP }} / {{ maxHP }}
         </dd>
       </div>
     </dl>
@@ -66,6 +66,10 @@
 <script lang="ts" setup>
 defineProps({
   maxHP: {
+    type: Number,
+    required: true,
+  },
+  currentHP: {
     type: Number,
     required: true,
   },

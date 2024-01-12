@@ -1,9 +1,6 @@
 export class Effect {
   private name = "";
   private description = "";
-  target: Hero;
-
-  // private effects: []  // paralise, drop weapon, burning, healing, blind, lower resist, higher resist
 
   setName(name: string): void {
     this.name = name;

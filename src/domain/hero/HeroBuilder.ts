@@ -1,19 +1,19 @@
-import type { iHero } from "./Hero";
 import { Hero } from "./Hero";
 import type { iRace } from "../race/Race";
 import type { iItem } from "../item/Item";
+import type { Skill } from "../skill/Skill";
 
 export interface iHeroBuilder {
-  Hero: iHero;
+  Hero: Hero;
 
   setRace(race: iRace): this;
   setName(name: string): this;
   setDescription(description: string): this;
-  getResult(): iHero;
+  getResult(): Hero;
 }
 
 export default class HeroBuilder implements iHeroBuilder {
-  Hero: iHero;
+  Hero: Hero;
 
   constructor(race: iRace) {
     this.Hero = new Hero(race);
@@ -39,7 +39,12 @@ export default class HeroBuilder implements iHeroBuilder {
     return this;
   }
 
-  getResult(): iHero {
+  addSkill(skill: Skill): this {
+    this.Hero.addSkill(skill);
+    return this;
+  }
+
+  getResult(): Hero {
     return this.Hero;
   }
 }

@@ -37,6 +37,7 @@
       <div class="w-1/6">
         <hero-info
           :max-h-p="hero.getMaxHP()"
+          :current-h-p="hero.getCurrentHP()"
           :max-mana="hero.getMaxMana()"
           :attack="hero.getAttack()"
           :defence="hero.getDefence()"
@@ -55,9 +56,15 @@ import HeroAttributes from "@/components/HeroCard/HeroAttributes.vue";
 import HeroInfo from "@/components/HeroCard/HeroInfo.vue";
 import HeroEquipment from "@/components/HeroCard/HeroEquipment.vue";
 import ElfDirector from "@/domain/hero/ElfDirector";
-import FireballDirector from "@/domain/skill/FireballDirector";
 
 const hero = ElfDirector.construct();
 
-const fireball = FireballDirector.construct();
+hero.decreaseCurrentHP(23);
+// q: what is the effect of hero.useSkill(heal, hero)?
+// a: hero.useSkill(heal, hero) will heal the hero by 10 HP
+//   and the hero's current HP will be 87
+//   and the hero's max HP will be 100
+//
+
+//hero.useSkill(heal, hero);
 </script>

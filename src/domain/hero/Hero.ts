@@ -1,5 +1,6 @@
 import type { iItem } from "../item/Item";
 import type { iRace, Attributes } from "../race/Race";
+import type { Skill } from "../skill/Skill";
 
 export type HeroEquipment = {
   head?: iItem;
@@ -14,27 +15,13 @@ export type HeroEquipment = {
   rightHand?: iItem;
 };
 
-export interface iHero {
-  getRace(): string;
-  getName(): string;
-  getDescription(): string;
-  getAttributes(): Attributes;
-  getMaxHP(): number;
-  getMaxMana(): number;
-  getEquipment(): HeroEquipment;
-  getDefence(): number;
-  getAttack(): number;
-  setRace(race: iRace): void;
-  setName(name: string): void;
-  setDescription(description: string): void;
-  equipItem(item: iItem): void;
-}
-
-export class Hero implements iHero {
+export class Hero {
   private race: iRace;
   private name?: string;
   private description = "";
   private equipment: HeroEquipment;
+  private currentHP: number;
+  private skills: Skill[] = [];
 
   constructor(race: iRace) {
     this.race = race;
@@ -51,6 +38,8 @@ export class Hero implements iHero {
       leftHand: undefined,
       rightHand: undefined,
     };
+
+    this.currentHP = this.getMaxHP();
   }
 
   public getRace(): string {
@@ -70,7 +59,22 @@ export class Hero implements iHero {
   }
 
   public getMaxHP(): number {
-    return this.race.attributes.constitution * 10;
+    let maxHp = this.race.attributes.constitution * 10;
+
+    Object.entries(this.equipment).forEach(([slot, item]) => {
+      if (item) {
+        item
+          .getEffects()
+          .filter((effect) => effect.name === "hp")
+          .forEach((effect) => (maxHp += effect.value));
+      }
+    });
+
+    return maxHp;
+  }
+
+  public getCurrentHP(): number {
+    return this.currentHP;
   }
 
   public getMaxMana(): number {
@@ -113,6 +117,10 @@ export class Hero implements iHero {
     return attack;
   }
 
+  getSkills(): Skill[] {
+    return this.skills;
+  }
+
   public setRace(race: iRace) {
     this.race = race;
   }
@@ -125,6 +133,10 @@ export class Hero implements iHero {
     this.description = description;
   }
 
+  public addSkill(skill: Skill) {
+    this.skills = [...this.skills, skill];
+  }
+
   public equipItem(item: iItem) {
     if (
       Object.keys(this.equipment).some(
@@ -135,5 +147,18 @@ export class Hero implements iHero {
     }
 
     return this;
+  }
+
+  // move to effect class
+  public decreaseCurrentHP(amount: number) {
+    this.currentHP -= amount;
+  }
+
+  public increaseCurrentHP(amount: number) {
+    this.currentHP += amount;
+  }
+
+  public useSkill(skill: Skill, target: iHero) {
+    skill.apply(target);
   }
 }

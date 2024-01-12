@@ -1,12 +1,26 @@
-export type DamageType = "physical" | "fire" | "lightning" | "cold";
+// export type DamageType = "physical" | "fire" | "lightning" | "cold";
+
+import type { Effect } from "../effect/Effect";
+
+export type SkillEffect = {
+  effect: Effect;
+  min: number;
+  max: number;
+};
 
 export class Skill {
   private name = "";
   private description = "";
-  private minDamage = 0;
-  private maxDamage = 0;
-  private damageType?: DamageType;
   private manaCost = 0;
+  private onEnterEffects: SkillEffect[] = [];
+  private onTickEffects: SkillEffect[] = [];
+  private onExitEffects: SkillEffect[] = [];
+  private duration = 0;
+
+  // private minDamage = 0;
+  // private maxDamage = 0;
+  // private damageType?: DamageType;
+
   // private effects: []  // paralise, drop weapon, burning, healing, blind, lower resist, higher resist
 
   setName(name: string): void {
@@ -17,20 +31,24 @@ export class Skill {
     this.description = description;
   }
 
-  setMinDamage(damage: number): void {
-    this.minDamage = damage;
-  }
-
-  setMaxDamage(damage: number): void {
-    this.maxDamage = damage;
-  }
-
-  setDamageType(damageType: DamageType): void {
-    this.damageType = damageType;
-  }
-
   setManaCost(manaCost: number): void {
     this.manaCost = manaCost;
+  }
+
+  setOnEnterEffects(effects: SkillEffect[]): void {
+    this.onEnterEffects = effects;
+  }
+
+  setOnTickEffects(effects: SkillEffect[]): void {
+    this.onTickEffects = effects;
+  }
+
+  setOnExitEffects(effects: SkillEffect[]): void {
+    this.onExitEffects = effects;
+  }
+
+  setDuration(duration: number): void {
+    this.duration = duration;
   }
 
   getName(): string {
@@ -41,15 +59,27 @@ export class Skill {
     return this.description;
   }
 
-  getDamageType(): DamageType | undefined {
-    return this.damageType;
-  }
-
-  getDamage(): number {
-    return Math.random() * (this.maxDamage - this.minDamage) + this.minDamage;
-  }
+  // getDamage(): number {
+  //   return Math.random() * (this.maxDamage - this.minDamage) + this.minDamage;
+  // }
 
   getManaCost(): Number {
     return this.manaCost;
+  }
+
+  getOnEnterEffects(): SkillEffect[] {
+    return this.onEnterEffects;
+  }
+
+  getOnTickEffects(): SkillEffect[] {
+    return this.onTickEffects;
+  }
+
+  getOnExitEffects(): SkillEffect[] {
+    return this.onExitEffects;
+  }
+
+  getDuration(): number {
+    return this.duration;
   }
 }
